@@ -22,6 +22,11 @@
      */
 #   ifdef __NR_riscv_hwprobe
 #    define OSSL_RISCV_HWPROBE
+#    include <asm/hwcap.h>
+#    define VECTOR_CAPABLE  (OPENSSL_riscv_hwcap_P & COMPAT_HWCAP_ISA_V)
+#    define EXTEND_DEPEND_VECTOR_MIN 15
+#    define EXTEND_DEPEND_VECTOR_MAX 23
+#    define IS_IN_DEPEND_VECTOR(BIT_OFFSET) ((EXTEND_DEPEND_VECTOR_MIN >= BIT_OFFSET) && (BIT_OFFSET <= EXTEND_DEPEND_VECTOR_MIN))
 #   endif
 #  endif
 # endif
